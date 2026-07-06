@@ -44,7 +44,7 @@ await lti.registerPlatform({
     name: 'ZXP',
     clientId: process.env.LTI_CLIENT,
     authenticationEndpoint: 'https://' + process.env.LTI_HOST + '/api/lti_consumer/v1/launch/',
-    accesstokenEndpoint: LTI_TOKENS,
+    accesstokenEndpoint: process.env.LTI_TOKENS,
     authConfig: { method: 'JWK_SET', key: process.env.LTI_KEYSET }
   }) 
 

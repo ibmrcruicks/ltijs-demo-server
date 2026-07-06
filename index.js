@@ -39,14 +39,15 @@ const setup = async () => {
   /**
    * Register platform
    */
-  /* await lti.registerPlatform({
-    url: 'http://localhost/moodle',
-    name: 'Platform',
-    clientId: 'CLIENTID',
-    authenticationEndpoint: 'http://localhost/moodle/mod/lti/auth.php',
-    accesstokenEndpoint: 'http://localhost/moodle/mod/lti/token.php',
-    authConfig: { method: 'JWK_SET', key: 'http://localhost/moodle/mod/lti/certs.php' }
-  }) */
+await lti.registerPlatform({
+    url: 'https://' + process.env.LTI_HOST,
+    name: 'ZXP',
+    clientId: process.env.LTI_CLIENT,
+    authenticationEndpoint: 'https://' + process.env.LTI_HOST + '/api/lti_consumer/v1/launch/',
+    accesstokenEndpoint: LTI_TOKENS,
+    authConfig: { method: 'JWK_SET', key: process.env.LTI_KEYSET }
+  }) 
+
 }
 
 setup()

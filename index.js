@@ -40,12 +40,12 @@ const setup = async () => {
    * Register platform
    */
 await lti.registerPlatform({
-    url: 'https://' + process.env.LTI_HOST,
-    name: process.env.LTI_PLATFORM,
-    clientId: process.env.LTI_CLIENT,
-    authenticationEndpoint: 'https://' + process.env.LTI_HOST + '/api/lti_consumer/v1/launch/',
-    accesstokenEndpoint: process.env.LTI_TOKENS,
-    authConfig: { method: 'JWK_SET', key: process.env.LTI_KEYSET }
+    url: process.env.LTI_HOST_URL,
+    name: process.env.LTI_PLATFORM_NAME,
+    clientId: process.env.LTI_CLIENT_ID,
+    authenticationEndpoint: process.env.LTI_LOGIN_URL,
+    accesstokenEndpoint: process.env.LTI_TOKEN_URL,
+    authConfig: { method: 'JWK_SET', key: process.env.LTI_KEYSET_URL }
   }) 
 
 }

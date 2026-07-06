@@ -41,7 +41,7 @@ const setup = async () => {
    */
 await lti.registerPlatform({
     url: 'https://' + process.env.LTI_HOST,
-    name: 'ZXP',
+    name: process.env.LTI_PLATFORM,
     clientId: process.env.LTI_CLIENT,
     authenticationEndpoint: 'https://' + process.env.LTI_HOST + '/api/lti_consumer/v1/launch/',
     accesstokenEndpoint: process.env.LTI_TOKENS,

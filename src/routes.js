@@ -17,7 +17,8 @@ router.post('/grade', async (req, res) => {
       activityProgress: 'Completed',
       gradingProgress: 'FullyGraded'
     }
-
+console.log(itoken)
+console.log(req.body)
     // Selecting linetItem ID
     let lineItemId = idtoken.platformContext.endpoint.lineitem // Attempting to retrieve it from idtoken
     if (!lineItemId) {

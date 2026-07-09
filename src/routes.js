@@ -17,8 +17,6 @@ router.post('/grade', async (req, res) => {
       activityProgress: 'Completed',
       gradingProgress: 'FullyGraded'
     }
-console.log(idtoken)
-console.log(req.body)
     // Selecting linetItem ID
     let lineItemId = idtoken.platformContext.endpoint.lineitem // Attempting to retrieve it from idtoken
     if (!lineItemId) {
@@ -39,9 +37,9 @@ console.log(req.body)
     }
 
     // Sending Grade
-    console.log(gradeObj)
+    console.log("Grade to post",gradeObj)
     const responseGrade = await lti.Grade.submitScore(idtoken, lineItemId, gradeObj)
-    console.log(responseGrade)
+    console.log("Grade post response",responseGrade)
     return res.send(responseGrade)
   } catch (err) {
     console.log(err.message)

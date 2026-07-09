@@ -41,6 +41,7 @@ console.log(req.body)
     // Sending Grade
     console.log(gradeObj)
     const responseGrade = await lti.Grade.submitScore(idtoken, lineItemId, gradeObj)
+    console.log(responseGrade)
     return res.send(responseGrade)
   } catch (err) {
     console.log(err.message)

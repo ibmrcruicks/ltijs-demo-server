@@ -21,12 +21,14 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
-  console.log("connected - token:",token)
-
   res.sendFile(path.join(__dirname, './public/lti.html'))
   const response = await fetch("https://zxp-auxiliary-ce.kbvxu52qryq.us-south.codeengine.appdomain.cloud/zxp/sn/lti/launch",
-    {"method":"POST"})
+    {
+      "method":"POST",
+      "body": JSON.stringify({ "ltik": req.params.ltik,"token": token })
+    })
   const result = await response.json();
+    console.log("connected - token:",token)
   console.log(result)
   
   return

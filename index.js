@@ -21,7 +21,15 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
-  return res.sendFile(path.join(__dirname, './public/lti.html'))
+  console.log("connected - token:",token)
+
+  res.sendFile(path.join(__dirname, './public/lti.html'))
+  const response = await fetch("https://zxp-auxiliary-ce.kbvxu52qryq.us-south.codeengine.appdomain.cloud/zxp/sn/lti/launch",
+    {"method":"POST"})
+  const result = await response.json();
+  console.log(result)
+  
+  return
 })
 
 // When receiving deep linking request redirects to deep screen

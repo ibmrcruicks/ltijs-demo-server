@@ -123,7 +123,7 @@ router.get('/info', async (req, res) => {
 // Wildcard route to deal with redirecting to React routes
 router.get('*', (req, res) => { 
   res.sendFile(path.join(__dirname, '../public/lti.html'))
-  console.log("* req", req);
+  console.log("* req", req.token);
 }
  //                              res.sendFile(path.join(__dirname, '../public/index.html')) } )
 

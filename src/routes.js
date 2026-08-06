@@ -26,7 +26,7 @@ router.post('/grade', async (req, res) => {
       const lineItems = response.lineItems
       if (lineItems.length === 0) {
         // Creating line item if there is none
-        console.log('Creating new line item')
+        //console.log('Creating new line item')
         const newLineItem = {
           scoreMaximum: 100,
           label: 'Grade',
@@ -39,12 +39,12 @@ router.post('/grade', async (req, res) => {
     }
 
     // Sending Grade
-    console.log("Grade to post",gradeObj)
+    log("Grade to post",gradeObj)
     const responseGrade = await lti.Grade.submitScore(idtoken, lineItemId, gradeObj)
-    console.log("Grade post response",responseGrade)
+    log("Grade post response",responseGrade)
     return res.send(responseGrade)
   } catch (err) {
-    console.log(err.message)
+    log(err.message)
     return res.status(500).send({ err: err.message })
   }
 })
@@ -56,7 +56,7 @@ router.get('/members', async (req, res) => {
     if (result) return res.send(result.members)
     return res.sendStatus(500)
   } catch (err) {
-    console.log(err.message)
+    log(err.message)
     return res.status(500).send(err.message)
   }
 })
@@ -79,7 +79,7 @@ router.post('/deeplink', async (req, res) => {
     if (form) return res.send(form)
     return res.sendStatus(500)
   } catch (err) {
-    console.log(err.message)
+    log(err.message)
     return res.status(500).send(err.message)
   }
 })

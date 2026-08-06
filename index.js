@@ -28,8 +28,8 @@ lti.onConnect(async (token, req, res) => {
       "body": JSON.stringify({ "ltik": req.params.ltik,"token": token })
     })
   const result = await response.json();
-    console.log("connected - token:",token)
-  console.log(result)
+  console.log(`LTI launch: ${token.user} ${token.userinfo?.email} ${token?.context?.label}`)
+  //console.log(result)
   
   return
 })

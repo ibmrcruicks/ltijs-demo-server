@@ -21,6 +21,10 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
+  console.log(">>>")
+  console.log(req.params)
+  console.log(token)
+  console.log("<<<")
   res.sendFile(path.join(__dirname, './public/lti.html'))
   const response = await fetch("https://zxp-auxiliary-ce.kbvxu52qryq.us-south.codeengine.appdomain.cloud/zxp/sn/lti/launch",
     {

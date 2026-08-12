@@ -21,12 +21,12 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
-  let msg = `LTI launch: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.context?.label}`
-  let launch_url = token?.platformContext?.custom?.launch_url
+  let msg = `LTI launch: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.context?.label}`;
+  let launch_url = token?.platformContext?.custom?.launch_url;
   if(launch_url){
     launch_url = launch_url.replace('{{email}}',token.userInfo?.email || '').replace("{{username}}",token.userInfo?.username || '')
     res.redirect(launch_url);
-    msg = `LTI custom: ${token.user} ${token.userInfo?.email} ${launch_url}`)
+    msg = `LTI custom: ${token.user} ${token.userInfo?.email} ${launch_url}`;
   } else {
     res.sendFile(path.join(__dirname, './public/lti.html'));
   }

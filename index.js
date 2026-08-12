@@ -21,6 +21,7 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
+  console.log(`LTI custom: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.custom?.launch_url}`)
   console.log(">>>")
   console.log(req.params)
   console.log(token)

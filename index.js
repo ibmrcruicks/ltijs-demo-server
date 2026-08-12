@@ -21,21 +21,22 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
-  console.log(`LTI custom: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.custom?.launch_url}`)
-  console.log(">>>")
-  console.log(req.params)
-  console.log(token)
-  console.log("<<<")
-  res.sendFile(path.join(__dirname, './public/lti.html'))
+  let msg = `LTI launch: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.context?.label}`
+  let launch_url = token?.platformContext?.custom?.launch_url
+  if(launch_url){
+    launch_url = launch_url.replace('{{email}}',token.userInfo?.email || '').replace("{{username}}",token.userInfo?.username || '')
+    res.redirect(launch_url);
+    msg = `LTI custom: ${token.user} ${token.userInfo?.email} ${launch_url}`)
+  } else {
+    res.sendFile(path.join(__dirname, './public/lti.html'));
+  }
   const response = await fetch("https://zxp-auxiliary-ce.kbvxu52qryq.us-south.codeengine.appdomain.cloud/zxp/sn/lti/launch",
     {
       "method":"POST",
       "body": JSON.stringify({ "ltik": req.params.ltik,"token": token })
     })
   const result = await response.json();
-  console.log(`LTI launch: ${token.user} ${token.userInfo?.email} ${token?.platformContext?.context?.label}`)
-  //console.log(result)
-  
+  console.log(msg)
   return
 })
 
